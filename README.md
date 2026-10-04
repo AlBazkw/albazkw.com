@@ -5,7 +5,8 @@ VRF and central systems, ducting, repairs, annual maintenance contracts, spare p
 Plain HTML, CSS and a little JavaScript. No build step.
 
 ```
-index.html      Home
+index.html      Home (English)
+ar/             Arabic mirror of every page, right-to-left, Cairo font
 services.html   Services (anchors: #install #vrf #ducting #amc #repair #parts)
 projects.html   Projects grid
 about.html      About, values, team
@@ -16,6 +17,28 @@ brand/          Logo (black lettering, white lettering) and app icon — same fi
 fonts/          Space Grotesk + Cairo (OFL), self-hosted, same files as Baz ERP
 img/            pattern.svg
 ```
+
+## SEO
+
+Targets both languages: air conditioning, HVAC, AC, central AC / تكييف، مكيف، وحدة، سنترال، صيانة تكييف.
+
+- Every page has a keyword-led title and description, a canonical URL, hreflang links (en, ar,
+  x-default) and Open Graph tags. The Arabic pages live under `/ar/` with the same filenames.
+- Structured data (JSON-LD): `HVACBusiness` on every page, `BreadcrumbList` on inner pages,
+  `FAQPage` on the services pages (the visible FAQ section is the source).
+- `sitemap.xml` lists all ten URLs with hreflang alternates; `robots.txt` points to it.
+- The home pages carry a keyword paragraph with internal links; the services pages a FAQ.
+
+After launch, do these by hand (they need the real business details and an account):
+
+1. Fill the phone number and street address, then add them to the JSON-LD `HVACBusiness`
+   block (`telephone`, `streetAddress`) in every page, or regenerate with a script.
+2. Create a Google Business Profile for "Al Baz Engineering" with the same name, address and
+   phone as the site, category "Air conditioning contractor", and link to albazkw.com. This is
+   the single biggest factor for local "AC repair near me" searches in Kuwait.
+3. Verify the site in Google Search Console and submit `sitemap.xml`.
+4. Add real project photos with descriptive alt text (e.g. "VRF outdoor unit installation, Salwa").
+5. Collect Google reviews; mention the area and service in replies.
 
 ## Theme
 

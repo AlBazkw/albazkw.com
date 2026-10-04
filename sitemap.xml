@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://albazkw.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://albazkw.com/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://albazkw.com/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/services.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/services.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albazkw.com/ar/services.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/services.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/services.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/services.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albazkw.com/projects.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/projects.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albazkw.com/ar/projects.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/projects.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/projects.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albazkw.com/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/about.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albazkw.com/ar/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/about.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albazkw.com/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/contact.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://albazkw.com/ar/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://albazkw.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://albazkw.com/ar/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://albazkw.com/contact.html"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
