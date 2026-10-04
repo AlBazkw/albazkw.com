@@ -8,10 +8,20 @@ services.html   Services (anchors: #mep #civil #maintenance #pm #design #supply)
 projects.html   Projects grid
 about.html      About, values, team
 contact.html    Contact form + map
-css/styles.css  All styles (colours in :root)
+css/styles.css  All styles. Brand tokens in :root mirror apps/web/src/app/globals.css in Baz ERP
 js/main.js      Mobile nav, active link, contact form fallback
-img/            SVG hero, pattern, favicon
+brand/          Logo (black lettering, white lettering) and app icon — same files as Baz ERP
+fonts/          Space Grotesk + Cairo (OFL), self-hosted, same files as Baz ERP
+img/            pattern.svg
 ```
+
+## Theme
+
+The site uses the ALBAZ brand "light refresh" shared with Baz ERP: Off-White `#F6F5F2`,
+Black `#111111`, one accent ALBAZ Blue `#126AA8`, Bone `#ECEAE5` / Stone `#55534E`.
+Flat, no shadows or gradients. Two gestures: the 3px black rule under the header and the
+blue square after a heading. Space Grotesk for Latin, Cairo for Arabic (RTL-ready via
+`dir="rtl"`). Keep `css/styles.css` tokens in step with the ERP's `globals.css`.
 
 ## Preview locally
 
@@ -57,4 +67,4 @@ albazkw.com is unaffected by moving the website.
 - Team names and photos on the About page
 - Founding year and statistics on the Home page
 - Google Maps embed location on the Contact page
-- Replace `img/hero.svg` with a real site photo if available (keep the same filename)
+- Real site photos for the project tiles and the About visual (currently the logo on black)
