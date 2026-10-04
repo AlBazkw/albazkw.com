@@ -15,6 +15,7 @@ css/styles.css  All styles. Brand tokens in :root mirror apps/web/src/app/global
 js/main.js      Mobile nav, active link, contact form fallback
 brand/          Logo (black lettering, white lettering) and app icon — same files as Baz ERP
 fonts/          Space Grotesk + Cairo (OFL), self-hosted, same files as Baz ERP
+img/photos/     Stock photography (Pexels License) with img/photos/CREDITS.md; same filenames = drop-in replacement
 img/            pattern.svg
 ```
 
@@ -39,6 +40,13 @@ After launch, do these by hand (they need the real business details and an accou
 3. Verify the site in Google Search Console and submit `sitemap.xml`.
 4. Add real project photos with descriptive alt text (e.g. "VRF outdoor unit installation, Salwa").
 5. Collect Google reviews; mention the area and service in replies.
+
+## Photo treatment
+
+Every photo gets one CSS treatment so stock shots from different photographers read as one set:
+`saturate(0.65) contrast(1.06)` on tiles and the hero (behind a flat 64% ink scrim), and a
+`.photo-tint` frame for secondary visuals that turns the image monochrome and lays ALBAZ Blue
+over it with `mix-blend-mode: multiply`. No gradients or vignettes, in keeping with the brand.
 
 ## Theme
 
@@ -92,4 +100,4 @@ albazkw.com is unaffected by moving the website.
 - Team names and photos on the About page
 - Founding year, units installed and the other statistics on the Home page; the opening hours in the top bar
 - Google Maps embed location on the Contact page
-- Real site photos for the project tiles and the About visual (currently the logo on black)
+- Replace the Pexels stock photos in img/photos/ with real Al Baz site photos (keep the filenames)

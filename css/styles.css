@@ -205,24 +205,13 @@ p { margin: 0 0 1em; }
 .nav-toggle { display: none; background: none; border: 0; padding: 8px; cursor: pointer; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--text); margin: 5px 0; transition: transform var(--motion-fast) var(--ease-standard), opacity var(--motion-fast) var(--ease-standard); }
 
-/* Hero — type-led, on the Off-White ground. */
+/* Hero — type-led on the Off-White ground by default; .hero-photo lays the
+   headline over a photograph behind a flat ink scrim (the brand's black share). */
 .hero {
   background: var(--bg);
   padding: clamp(4rem, 9vw, 7.5rem) 0;
   position: relative;
   overflow: hidden;
-}
-.hero::before {
-  /* The gear, faint, at the inline end: the mark as texture, never as ornament. */
-  content: '';
-  position: absolute;
-  inset-inline-end: -6vw; top: 50%;
-  width: clamp(300px, 36vw, 560px);
-  aspect-ratio: 580 / 660; /* the gear alone: the left 58% of the lockup */
-  transform: translateY(-50%);
-  background: url('../brand/logo-white.png') left center / auto 100% no-repeat;
-  opacity: 0.1;
-  pointer-events: none;
 }
 .hero .container { position: relative; max-width: var(--max); }
 .hero .inner { max-width: 760px; }
@@ -231,6 +220,38 @@ p { margin: 0 0 1em; }
 .hero .btn-outline { background: var(--surface); border-color: var(--border); color: var(--text); }
 .hero .btn-outline:hover { background: var(--panel); }
 .hero .actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.8rem; }
+
+.hero-photo { background: var(--ink-bg); color: var(--ink-text); padding: clamp(5rem, 11vw, 9rem) 0; }
+.hero-photo::after { display: none; }
+.hero-photo > img {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
+  object-fit: cover; object-position: center 78%;
+  filter: saturate(0.6) contrast(1.08) brightness(0.9);
+}
+.hero-photo::before { content: ''; position: absolute; inset: 0; z-index: 1; background: rgba(17, 17, 17, 0.66); }
+.hero-photo .container { z-index: 2; }
+.hero-photo .eyebrow { color: var(--ink-muted); }
+.hero-photo h1 { color: #fff; }
+.hero-photo p { color: var(--ink-text); }
+.hero-photo .btn-outline { background: transparent; border-color: rgba(255,255,255,0.45); color: #fff; }
+.hero-photo .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+/* Photographs — one treatment everywhere so the stock shots read as one set:
+   a step less saturation, a touch more contrast. .photo-tint pushes the image
+   to monochrome and lays ALBAZ Blue over it (multiply), so secondary visuals
+   carry the accent without adding a second hue. Flat: no vignettes. */
+.project img, .service-visual img, .split .visual img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  filter: saturate(0.65) contrast(1.06);
+  transition: transform 0.4s var(--ease-standard);
+}
+.photo-tint img, .split .visual.photo-tint img, .service-visual.photo-tint img { filter: grayscale(1) contrast(1.12) brightness(1.02); }
+.photo-tint::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--primary); mix-blend-mode: multiply; opacity: 0.78; pointer-events: none;
+}
+.photo-tint > .badge { z-index: 2; }
 
 /* Stats — the black band. */
 .stats { background: var(--ink-bg); color: var(--ink-text); }
@@ -281,17 +302,11 @@ p { margin: 0 0 1em; }
 .split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3.5rem; align-items: center; }
 .split .visual {
   border-radius: var(--radius);
-  background: var(--ink-bg);
+  background: var(--primary);
   aspect-ratio: 4 / 3;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--ink-border);
-}
-.split .visual::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: url('../brand/logo-white.png') center / 70% no-repeat;
-  opacity: 0.9;
 }
 .split .visual .badge {
   position: absolute; inset-inline-start: 1.5rem; bottom: 1.5rem;
@@ -323,13 +338,13 @@ p { margin: 0 0 1em; }
 }
 .project:hover { border-color: var(--ink-muted); }
 .project::before {
-  content: '';
-  position: absolute; inset-inline-end: -18%; top: -10%;
-  width: 70%; aspect-ratio: 1000 / 660;
-  background: url('../brand/logo-white.png') center / contain no-repeat;
-  opacity: 0.08;
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: rgba(17, 17, 17, 0.58);
+  transition: background-color var(--motion-fast) var(--ease-standard);
 }
-.project > * { position: relative; }
+.project:hover::before { background: rgba(17, 17, 17, 0.46); }
+.project:hover img { transform: scale(1.03); }
+.project > div { position: relative; z-index: 2; }
 .project .tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
 .project h3 { margin: 0.35rem 0 0.2rem; font-size: 1.1rem; color: #fff; }
 .project p { margin: 0; font-size: 0.88rem; color: var(--ink-muted); }
@@ -419,6 +434,7 @@ p { margin: 0 0 1em; }
   border: 1px solid var(--border);
   position: relative; overflow: hidden;
   display: grid; place-items: center; color: var(--primary);
+  background: var(--primary);
 }
 .service-visual svg { width: 72px; height: 72px; position: relative; }
 .service-row ul { padding-inline-start: 1.2rem; color: var(--text-muted); }
@@ -452,7 +468,7 @@ p { margin: 0 0 1em; }
   .split, .contact-grid, .service-row { grid-template-columns: 1fr; gap: 2rem; }
   .service-row:nth-child(even) .service-visual { order: 0; }
   .cta { flex-direction: column; align-items: flex-start; }
-  .hero::before { opacity: 0.35; }
+  .hero:not(.hero-photo)::before { opacity: 0.35; }
 }
 @media (max-width: 720px) {
   .topbar { display: none; }
