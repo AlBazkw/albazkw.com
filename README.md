@@ -1,10 +1,12 @@
 # Al Baz Engineering — albazkw.com
 
-Static marketing site: plain HTML, CSS and a little JavaScript. No build step.
+Marketing site for Al Baz Engineering, a Kuwaiti air conditioning company (supply, installation,
+VRF and central systems, ducting, repairs, annual maintenance contracts, spare parts).
+Plain HTML, CSS and a little JavaScript. No build step.
 
 ```
 index.html      Home
-services.html   Services (anchors: #mep #civil #maintenance #pm #design #supply)
+services.html   Services (anchors: #install #vrf #ducting #amc #repair #parts)
 projects.html   Projects grid
 about.html      About, values, team
 contact.html    Contact form + map
@@ -63,8 +65,8 @@ albazkw.com is unaffected by moving the website.
 
 - Phone number (search for `+965 XXXX XXXX` and `+965XXXXXXXX`)
 - Office address (search for `Street, Block, Area`)
-- Real project names, photos and client logos
+- Real project names and photos; brand logos for the "Brands we supply" row (Gree, Midea, LG, Samsung, York, Carrier)
 - Team names and photos on the About page
-- Founding year and statistics on the Home page
+- Founding year, units installed and the other statistics on the Home page; the opening hours in the top bar
 - Google Maps embed location on the Contact page
 - Real site photos for the project tiles and the About visual (currently the logo on black)

@@ -39,7 +39,7 @@
       var f = new FormData(form);
       var body = 'Name: ' + f.get('name') + '\nCompany: ' + f.get('company') +
         '\nEmail: ' + f.get('email') + '\nPhone: ' + f.get('phone') +
-        '\nService: ' + f.get('service') + '\n\n' + f.get('message');
+        '\nService: ' + f.get('service') + '\nProperty: ' + f.get('property') + '\n\n' + f.get('message');
       location.href = 'mailto:' + form.dataset.to + '?subject=' +
         encodeURIComponent('Website enquiry from ' + f.get('name')) +
         '&body=' + encodeURIComponent(body);
