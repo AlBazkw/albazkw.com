@@ -363,6 +363,17 @@ p { margin: 0 0 1em; }
 .step h3 { font-size: 1.05rem; color: #fff; }
 .step p { font-size: 0.93rem; color: var(--ink-muted); margin: 0; }
 
+/* Trade-in card — the 'what we buy' list on the black band. */
+.trade-card { background: var(--ink-surface); border: 1px solid var(--ink-border); border-radius: var(--radius); padding: 1.8rem; }
+.trade-card .eyebrow { color: var(--ink-muted); }
+.trade-card h3 { color: #fff; margin-bottom: 1rem; }
+.trade-list { list-style: none; padding: 0; margin: 0 0 1.2rem; }
+.trade-list li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.65rem 0; border-bottom: 1px solid var(--ink-border); color: var(--ink-text); }
+.trade-list li:last-child { border-bottom: 0; }
+.trade-list li span:last-child { color: var(--ink-muted); text-align: end; font-variant-numeric: tabular-nums; }
+.trade-card .muted { color: var(--ink-muted); font-size: 0.9rem; margin: 0; }
+.section-dark .checks li { color: var(--ink-text); }
+
 /* Clients */
 .logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
 .logo {

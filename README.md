@@ -7,7 +7,7 @@ Plain HTML, CSS and a little JavaScript. No build step.
 ```
 index.html      Home (English)
 ar/             Arabic mirror of every page, right-to-left, Cairo font
-services.html   Services (anchors: #install #vrf #ducting #amc #repair #parts)
+services.html   Services (anchors: #install #replace #buyback #vrf #ducting #amc #repair #parts)
 projects.html   Projects grid
 about.html      About, values, team
 contact.html    Contact form + map
