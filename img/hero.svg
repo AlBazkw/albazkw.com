@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b3a66"/>
+      <stop offset="1" stop-color="#0b1f3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <g stroke="#f2a900" stroke-width="3" fill="none" opacity="0.55">
+    <path d="M1100 900V300l60-40v640M1160 260l60 40v600M1220 300l60-40v640M1280 260l60 40v600"/>
+    <path d="M1100 420h240M1100 540h240M1100 660h240M1100 780h240"/>
+    <path d="M1100 420l60 120 60-120 60 120 60-120M1100 540l60 120 60-120 60 120 60-120M1100 660l60 120 60-120 60 120 60-120"/>
+    <path d="M900 900V560l420-180v520"/>
+    <path d="M1340 380l200 60v460"/>
+    <path d="M700 900V700h200"/>
+    <path d="M1200 260V120l320-40v180"/>
+    <path d="M1180 120l-90-10v790"/>
+  </g>
+  <g stroke="#ffffff" stroke-width="1.2" fill="none" opacity="0.18">
+    <path d="M0 860h1600M0 820h1600M0 780h1600"/>
+    <path d="M200 900V640l140-60v320M340 580l140 60v260M480 640l140-60v320"/>
+  </g>
+</svg>
