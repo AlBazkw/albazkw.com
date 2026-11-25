@@ -222,7 +222,7 @@ function build(lang, file) {
 <section class="hero">
   <div class="container">
     <span class="label" lang="en">ALBAZ Engineering · Air conditioning · Kuwait</span>
-    <h1 class="display">${t('ودّع القديم<br>واستقبل البرودة', 'Out with the old.<br>In with the cold')}${sq}</h1>
+    <h1 class="display">${t('برودة تعتمد عليها', 'Out with the old.<br>In with the cold')}${sq}</h1>
     <div class="hero-foot">
       <div>
         <p class="lead">${t('نبيع ونركّب مكيفات جديدة، ونستبدل القديمة، ونشتري مكيفك القديم شغّالاً كان أو معطّلاً.', 'We sell and install new air conditioning units, replace the old ones, and buy your old unit, working or not.')}</p>
