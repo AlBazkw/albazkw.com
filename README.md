@@ -1,103 +1,74 @@
-# Al Baz Engineering — albazkw.com
+# ALBAZ Engineering — albazkw.com
 
-Marketing site for Al Baz Engineering, a Kuwaiti air conditioning company (supply, installation,
-VRF and central systems, ducting, repairs, annual maintenance contracts, spare parts).
-Plain HTML, CSS and a little JavaScript. No build step.
+Marketing site for ALBAZ Engineering, an air conditioning company in Kuwait: new units sold
+and installed, old units replaced and bought back, VRF and central systems, ducting,
+maintenance contracts, repair and spare parts.
+
+Static HTML, CSS and a little JavaScript. **Arabic is the default language at the site root;
+English lives under `/en/`.**
 
 ```
-index.html      Home (English)
-ar/             Arabic mirror of every page, right-to-left, Cairo font
-services.html   Services (anchors: #install #replace #buyback #vrf #ducting #amc #repair #parts)
-projects.html   Projects grid
-about.html      About, values, team
-contact.html    Contact form + map
-css/styles.css  All styles. Brand tokens in :root mirror apps/web/src/app/globals.css in Baz ERP
-js/main.js      Mobile nav, active link, contact form fallback
-brand/          Logo (black lettering, white lettering) and app icon — same files as Baz ERP
-fonts/          Space Grotesk + Cairo (OFL), self-hosted, same files as Baz ERP
-img/photos/     Stock photography (Pexels License) with img/photos/CREDITS.md; same filenames = drop-in replacement
-img/            pattern.svg
+tools/build.js   Generates every page. ALL COPY LIVES HERE (both languages)
+css/site.css     All styles
+js/site.js       Menu button, footer year, quote form
+index.html …     Arabic pages (generated, do not edit by hand)
+en/              English pages (generated)
+brand/           Logo and app icon
+fonts/           Cairo + Space Grotesk (OFL), self-hosted
+img/photos/      Photography (Pexels License, see img/photos/CREDITS.md)
+sitemap.xml, robots.txt   Generated
 ```
+
+## Changing the site
+
+Edit copy in `tools/build.js`, styles in `css/site.css`, then rebuild:
+
+```bash
+node tools/build.js
+```
+
+Preview:
+
+```bash
+npx --yes serve -l 8082 .
+```
+
+## Design
+
+Direction "Arabic First", built to ALBAZ Brand Guidelines V3.0 (the ALBAZ Engineering Design
+System). The rules the site follows:
+
+- Off-white 60 · Black 25 · Blue 10 · Bone/Stone 5. Blue `#126AA8` marks one thing per screen:
+  the headline's full stop (the blue square) or the main action.
+- Arabic (Cairo) leads. Latin (Space Grotesk) supports, in letter-spaced caps labels.
+- Square corners everywhere; the pill chip is the only rounded element. No shadows, no
+  gradients, no icons.
+- Section headers are `٠١ — Title` over a black hairline. Every page ends on the black
+  contact block, then the logo on its own off-white band (the logo never sits on black).
+- Photography is natural: no tints, no filters.
 
 ## SEO
 
-Targets both languages: air conditioning, HVAC, AC, central AC / تكييف، مكيف، وحدة، سنترال، صيانة تكييف.
+- Keyword titles and descriptions in both languages (air conditioning, HVAC, AC /
+  تكييف، مكيف، سنترال، شراء مكيفات مستعملة), canonical URLs, hreflang (ar, en, x-default = ar).
+- JSON-LD: `HVACBusiness` on every page, `BreadcrumbList` on inner pages, `FAQPage` on services.
+- `sitemap.xml` lists all ten URLs with hreflang alternates.
 
-- Every page has a keyword-led title and description, a canonical URL, hreflang links (en, ar,
-  x-default) and Open Graph tags. The Arabic pages live under `/ar/` with the same filenames.
-- Structured data (JSON-LD): `HVACBusiness` on every page, `BreadcrumbList` on inner pages,
-  `FAQPage` on the services pages (the visible FAQ section is the source).
-- `sitemap.xml` lists all ten URLs with hreflang alternates; `robots.txt` points to it.
-- The home pages carry a keyword paragraph with internal links; the services pages a FAQ.
-
-After launch, do these by hand (they need the real business details and an account):
-
-1. Fill the phone number and street address, then add them to the JSON-LD `HVACBusiness`
-   block (`telephone`, `streetAddress`) in every page, or regenerate with a script.
-2. Create a Google Business Profile for "Al Baz Engineering" with the same name, address and
-   phone as the site, category "Air conditioning contractor", and link to albazkw.com. This is
-   the single biggest factor for local "AC repair near me" searches in Kuwait.
-3. Verify the site in Google Search Console and submit `sitemap.xml`.
-4. Add real project photos with descriptive alt text (e.g. "VRF outdoor unit installation, Salwa").
-5. Collect Google reviews; mention the area and service in replies.
-
-## Photo treatment
-
-Every photo gets one CSS treatment so stock shots from different photographers read as one set:
-`saturate(0.65) contrast(1.06)` on tiles and the hero (behind a flat 64% ink scrim), and a
-`.photo-tint` frame for secondary visuals that turns the image monochrome and lays ALBAZ Blue
-over it with `mix-blend-mode: multiply`. No gradients or vignettes, in keeping with the brand.
-
-## Theme
-
-The site uses the ALBAZ brand "light refresh" shared with Baz ERP: Off-White `#F6F5F2`,
-Black `#111111`, one accent ALBAZ Blue `#126AA8`, Bone `#ECEAE5` / Stone `#55534E`.
-Flat, no shadows or gradients. Two gestures: the 3px black rule under the header and the
-blue square after a heading. Space Grotesk for Latin, Cairo for Arabic (RTL-ready via
-`dir="rtl"`). Keep `css/styles.css` tokens in step with the ERP's `globals.css`.
-
-## Preview locally
-
-```bash
-npx --yes serve -l 8080 .
-```
-
-Then open http://localhost:8080.
+After launch: create a Google Business Profile ("Air conditioning contractor") with the same
+name and phone as the site, verify the site in Google Search Console and submit the sitemap.
 
 ## Deploy (domain is at Squarespace)
 
-The domain `albazkw.com` is registered with Squarespace Domains. The site itself can be hosted on
-any static host; Squarespace only needs to point DNS at it.
+1. Push this folder to GitHub and enable GitHub Pages (the `CNAME` file is already here).
+2. In Squarespace: Domains → albazkw.com → DNS. Replace the default `@` and `www` records with
+   GitHub Pages' four A records (185.199.108–111.153) and a `www` CNAME to `albazkw.github.io`.
+   Leave MX records alone.
 
-Recommended: **Cloudflare Pages** or **Netlify** (both free for a site like this, both give HTTPS).
+## Still needed from the business
 
-1. Push this folder to a GitHub repository.
-2. In Cloudflare Pages / Netlify, create a project from that repository. No build command,
-   publish directory `/`.
-3. Add the custom domain `albazkw.com` and `www.albazkw.com` in the host's dashboard. It will
-   show the DNS records you need.
-4. In Squarespace: Domains → albazkw.com → DNS settings. Delete the default Squarespace
-   A/CNAME records for `@` and `www`, then add the records from step 3
-   (typically a CNAME for `www` and either an A record or ALIAS/CNAME-flattened record for `@`).
-5. Wait for DNS to propagate (minutes to a few hours). HTTPS is issued automatically.
-
-Keep any existing MX records (email) untouched. Google Workspace or Microsoft 365 email on
-albazkw.com is unaffected by moving the website.
-
-## Contact form
-
-- On **Netlify** the form works as-is (`data-netlify="true"`); enable form notifications to
-  `info@albazkw.com` in the Netlify dashboard.
-- On **Cloudflare Pages** or any other host, either point the form at a Formspree endpoint
-  (`action="https://formspree.io/f/XXXX"`, remove `data-mode="mailto"`) or keep the current
-  behaviour, which opens the visitor's email client with the enquiry pre-filled.
-
-## To fill in before launch
-
-- Phone number (search for `+965 XXXX XXXX` and `+965XXXXXXXX`)
-- Office address (search for `Street, Block, Area`)
-- Real project names and photos; brand logos for the "Brands we supply" row (Gree, Midea, LG, Samsung, York, Carrier)
-- Team names and photos on the About page
-- Founding year, units installed and the other statistics on the Home page; the opening hours in the top bar
-- Google Maps embed location on the Contact page
-- Replace the Pexels stock photos in img/photos/ with real Al Baz site photos (keep the filenames)
+- Office address and opening hours (left out of the site rather than invented).
+- Which platform `@albazkw` is on, so it can be linked.
+- Real photos of jobs, team and vans to replace the stock set (keep the filenames).
+- Real project names for the "Our work" page, which currently shows kinds of work only.
+- Confirmation of the trade-in terms shown: same-day pricing, cash or credit, removal included.
+- Whether a 24/7 emergency line exists (removed until confirmed).
