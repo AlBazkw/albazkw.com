@@ -9,7 +9,9 @@ const SITE = 'https://albazkw.com';
 const PHONE = '+965 9555 0029';
 const TEL = '+96595550029';
 const EMAIL = 'info@albazkw.com';
-const HANDLE = '@albazkw';
+const HANDLE = '@albaz.kw';
+const INSTAGRAM = 'https://www.instagram.com/albaz.kw/';
+const MAP = 'https://maps.app.goo.gl/PmMJFyK5GMTrRpu48';
 const BRANDS = 'Gree · Midea · LG · Samsung · York · Carrier';
 
 const FILES = ['index.html', 'services.html', 'projects.html', 'about.html', 'contact.html'];
@@ -180,8 +182,9 @@ function build(lang, file) {
       <a class="phone" href="tel:${TEL}" dir="ltr">${PHONE}</a>
       <ul class="rows">
         <li><span>${t('البريد', 'Email')}</span><a class="lat" href="mailto:${EMAIL}">${EMAIL}</a></li>
-        <li><span>${t('حساباتنا', 'Social')}</span><span class="lat">${HANDLE}</span></li>
-        <li><span>${t('نخدم', 'We cover')}</span><span>${t('جميع محافظات الكويت', 'All Kuwait governorates')}</span></li>
+        <li><span>${t('إنستغرام', 'Instagram')}</span><a class="lat" href="${INSTAGRAM}" target="_blank" rel="noopener">${HANDLE}</a></li>
+        <li><span>${t('العنوان', 'Address')}</span><a href="${MAP}" target="_blank" rel="noopener">${t('الري، الكويت', 'Al Rai, Kuwait')}</a></li>
+        <li><span>${t('ساعات العمل', 'Hours')}</span><span>${t('8 ص – 8 م، يومياً عدا الجمعة', '8 am – 8 pm, every day except Friday')}</span></li>
       </ul>
     </div>
   </div>
@@ -425,7 +428,9 @@ function build(lang, file) {
     logo: SITE + '/brand/app-icon-white.png', image: SITE + '/brand/app-icon-white.png',
     telephone: TEL, email: EMAIL,
     description: 'Air conditioning company in Kuwait: new AC units sold and installed, old units replaced and bought back, central and ducted systems, VRF, ducting, AC maintenance contracts, AC repair and spare parts. شركة تكييف في الكويت: بيع مكيفات جديدة، استبدال وشراء المكيفات القديمة، صيانة وإصلاح مكيفات سبليت وسنترال وVRF.',
-    address: { '@type': 'PostalAddress', addressCountry: 'KW' },
+    address: { '@type': 'PostalAddress', addressLocality: 'Al Rai', addressCountry: 'KW' },
+    hasMap: MAP, sameAs: [INSTAGRAM],
+    openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '08:00', closes: '20:00' }],
     areaServed: { '@type': 'Country', name: 'Kuwait' }, knowsLanguage: ['ar', 'en'],
     hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Air conditioning services',
       itemListElement: SERVICES.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.en.t, alternateName: s.ar.t, url: SITE + '/services.html#' + s.id, areaServed: 'Kuwait' } })) },

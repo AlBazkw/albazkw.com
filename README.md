@@ -66,8 +66,7 @@ name and phone as the site, verify the site in Google Search Console and submit 
 
 ## Still needed from the business
 
-- Office address and opening hours (left out of the site rather than invented).
-- Which platform `@albazkw` is on, so it can be linked.
+- A full street address, if you want more than "Al Rai, Kuwait" (the address links to Google Maps).
 - Real photos of jobs, team and vans to replace the stock set (keep the filenames).
 - Real project names for the "Our work" page, which currently shows kinds of work only.
 - Confirmation of the trade-in terms shown: same-day pricing, cash or credit, removal included.
