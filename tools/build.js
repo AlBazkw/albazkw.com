@@ -22,28 +22,28 @@ const arDigits = n => String(n).padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤
 /* ------------------------------------------------------------------ SEO */
 const META = {
   'index.html': {
-    ar: ['شركة تكييف في الكويت | بيع مكيفات جديدة، استبدال وشراء المكيفات القديمة – الباز للهندسة',
-         'الباز للهندسة تبيع وتركّب مكيفات جديدة، تستبدل وتحدّث المكيفات القديمة، وتشتري المكيفات المستعملة نقداً أو كخصم. مكيفات سبليت وسنترال وVRF وصيانة تكييف في جميع محافظات الكويت.'],
+    ar: ['شركة تكييف في الكويت | بيع مكيفات جديدة، استبدال وشراء المكيفات القديمة – الباز الهندسية',
+         'الباز الهندسية تبيع وتركّب مكيفات جديدة، تستبدل وتحدّث المكيفات القديمة، وتشتري المكيفات المستعملة نقداً أو كخصم. مكيفات سبليت وسنترال وVRF وصيانة تكييف في جميع محافظات الكويت.'],
     en: ['New AC Units, Replacement & Old AC Buy-Back in Kuwait | Al Baz Engineering',
          'Al Baz Engineering sells and installs new air conditioning units, replaces and upgrades old AC, and buys used units for cash or trade-in. Split, central and VRF systems and HVAC maintenance across Kuwait.'] },
   'services.html': {
-    ar: ['خدمات التكييف في الكويت | تركيب مكيفات جديدة، استبدال وشراء القديمة، وصيانة – الباز للهندسة',
+    ar: ['خدمات التكييف في الكويت | تركيب مكيفات جديدة، استبدال وشراء القديمة، وصيانة – الباز الهندسية',
          'بيع وتركيب مكيفات جديدة، استبدال المكيفات القديمة أو شراؤها، تكييف سنترال وأنظمة VRF، دكت، عقود صيانة تكييف، إصلاح مكيفات وقطع غيار في جميع مناطق الكويت.'],
     en: ['AC Installation, Replacement, Old Unit Buy-Back & Maintenance in Kuwait | Al Baz Engineering',
          'New AC units sold and installed, old air conditioners replaced or bought back, VRF and central systems, ducting, AC maintenance contracts, repair and spare parts across Kuwait.'] },
   'projects.html': {
-    ar: ['أعمال التكييف في الكويت | سبليت، مخفي، باكج وVRF – الباز للهندسة',
-         'ما تنفّذه الباز للهندسة في الكويت: وحدات سبليت للمنازل، تكييف مخفي وسنترال للمكاتب والفلل، وحدات باكج، أنظمة VRF، استبدال المكيفات القديمة وعقود الصيانة.'],
+    ar: ['أعمال التكييف في الكويت | سبليت، مخفي، باكج وVRF – الباز الهندسية',
+         'ما تنفّذه الباز الهندسية في الكويت: وحدات سبليت للمنازل، تكييف مخفي وسنترال للمكاتب والفلل، وحدات باكج، أنظمة VRF، استبدال المكيفات القديمة وعقود الصيانة.'],
     en: ['Air Conditioning & HVAC Work in Kuwait | Al Baz Engineering',
          'What Al Baz Engineering installs in Kuwait: split units for homes, ducted and central AC for offices and villas, package units, VRF systems, old unit replacement and maintenance contracts.'] },
   'about.html': {
-    ar: ['عن الباز للهندسة | متخصصو التكييف والتبريد في الكويت',
-         'الباز للهندسة شركة كويتية متخصصة في التكييف: بيع وتركيب مكيفات سبليت وسنترال ومخفي وأنظمة VRF، واستبدال وشراء المكيفات القديمة، وصيانتها.'],
+    ar: ['عن الباز الهندسية | متخصصو التكييف والتبريد في الكويت',
+         'الباز الهندسية شركة كويتية متخصصة في التكييف: بيع وتركيب مكيفات سبليت وسنترال ومخفي وأنظمة VRF، واستبدال وشراء المكيفات القديمة، وصيانتها.'],
     en: ['About Al Baz Engineering | AC & HVAC Specialists in Kuwait',
          'Al Baz Engineering is a Kuwaiti air conditioning and HVAC specialist: new split, central, ducted and VRF AC systems sold and installed, old units replaced and bought back, and all of it maintained.'] },
   'contact.html': {
-    ar: ['اتصل بالباز للهندسة | عرض سعر تكييف مجاني في الكويت',
-         'اطلب عرض سعر مجاني لتركيب تكييف جديد، أو استبدال مكيفك القديم، أو بيعه. الباز للهندسة، تكييف في جميع محافظات الكويت.'],
+    ar: ['اتصل بالباز الهندسية | عرض سعر تكييف مجاني في الكويت',
+         'اطلب عرض سعر مجاني لتركيب تكييف جديد، أو استبدال مكيفك القديم، أو بيعه. الباز الهندسية، تكييف في جميع محافظات الكويت.'],
     en: ['Contact Al Baz Engineering | Free AC Quote in Kuwait',
          'Request a free quote for a new AC installation, a replacement, or a price for your old unit. Al Baz Engineering, air conditioning and HVAC across Kuwait.'] },
 };
@@ -160,7 +160,7 @@ function build(lang, file) {
 <a class="skip" href="#main">${t('انتقل إلى المحتوى', 'Skip to content')}</a>
 <header class="site-header">
   <div class="container">
-    <a class="brand" href="./" aria-label="${t('الباز للهندسة، الرئيسية', 'ALBAZ Engineering, home')}"><img src="${base}brand/logo-transparent.png" alt="${t('الباز للهندسة', 'ALBAZ Engineering')}" width="985" height="650"></a>
+    <a class="brand" href="./" aria-label="${t('الباز الهندسية، الرئيسية', 'ALBAZ Engineering, home')}"><img src="${base}brand/logo-transparent.png" alt="${t('الباز الهندسية', 'ALBAZ Engineering')}" width="985" height="650"></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">${t('القائمة', 'Menu')}</button>
     <nav class="nav" id="nav" aria-label="${t('القائمة الرئيسية', 'Primary')}">
       ${nav.map(([h, a, e]) => `<a href="${h}"${h === file ? ' aria-current="page"' : ''}>${t(a, e)}</a>`).join('\n      ')}
@@ -193,7 +193,7 @@ function build(lang, file) {
   const footer = `
 <footer class="site-footer">
   <div class="container">
-    <a class="brand" href="./"><img src="${base}brand/logo-transparent.png" alt="${t('الباز للهندسة', 'ALBAZ Engineering')}" width="985" height="650" loading="lazy"></a>
+    <a class="brand" href="./"><img src="${base}brand/logo-transparent.png" alt="${t('الباز الهندسية', 'ALBAZ Engineering')}" width="985" height="650" loading="lazy"></a>
     <nav class="foot-nav" aria-label="${t('روابط التذييل', 'Footer')}">
       <a href="services.html">${t('خدماتنا', 'Services')}</a>
       <a href="projects.html">${t('أعمالنا', 'Our work')}</a>
@@ -201,7 +201,7 @@ function build(lang, file) {
       <a href="contact.html">${t('اتصل بنا', 'Contact')}</a>
     </nav>
     <div class="legal">
-      <span>© <span id="year">2026</span> ${t('الباز للهندسة. جميع الحقوق محفوظة.', 'ALBAZ Engineering. All rights reserved.')}</span>
+      <span>© <span id="year">2026</span> ${t('الباز الهندسية. جميع الحقوق محفوظة.', 'ALBAZ Engineering. All rights reserved.')}</span>
       <span class="label" lang="en">albazkw.com · Sales · Installation · Maintenance</span>
     </div>
   </div>
@@ -296,10 +296,10 @@ function build(lang, file) {
 
 <section class="section">
   <div class="container">
-    ${ruleHead(3, 'الباز للهندسة', 'ALBAZ Engineering', ['تكييف في الكويت', 'Air conditioning in Kuwait'])}
+    ${ruleHead(3, 'الباز الهندسية', 'ALBAZ Engineering', ['تكييف في الكويت', 'Air conditioning in Kuwait'])}
     <div class="prose">
       ${ar
-        ? `<p>الباز للهندسة شركة تكييف وتبريد في الكويت. نبيع ونركّب <a href="services.html#install">مكيفات جديدة سبليت وشباك وكاسيت ومخفي</a>، و<a href="services.html#replace">نستبدل ونحدّث المكيفات القديمة</a>، و<a href="services.html#buyback">نشتري المكيفات المستعملة</a>، ونصمّم <a href="services.html#vrf">أنظمة التكييف السنترال (المركزي) وVRF</a> للفلل والمكاتب والمعارض.</p>
+        ? `<p>الباز الهندسية شركة تكييف وتبريد في الكويت. نبيع ونركّب <a href="services.html#install">مكيفات جديدة سبليت وشباك وكاسيت ومخفي</a>، و<a href="services.html#replace">نستبدل ونحدّث المكيفات القديمة</a>، و<a href="services.html#buyback">نشتري المكيفات المستعملة</a>، ونصمّم <a href="services.html#vrf">أنظمة التكييف السنترال (المركزي) وVRF</a> للفلل والمكاتب والمعارض.</p>
       <p>وبعد التركيب: <a href="services.html#amc">عقود صيانة تكييف سنوية</a>، و<a href="services.html#repair">إصلاح مكيفات</a>، و<a href="services.html#ducting">دكت وعزل</a>، و<a href="services.html#parts">قطع غيار</a>، في مدينة الكويت وحولي والفروانية والأحمدي والجهراء ومبارك الكبير.</p>`
         : `<p>ALBAZ Engineering is an air conditioning and HVAC company in Kuwait. We sell and install <a href="services.html#install">new split AC, window, cassette and ducted units</a>, <a href="services.html#replace">replace and upgrade old air conditioners</a>, <a href="services.html#buyback">buy used AC units</a>, and design <a href="services.html#vrf">central air conditioning and VRF systems</a> for villas, offices and showrooms.</p>
       <p>After the install: <a href="services.html#amc">annual AC maintenance contracts</a>, <a href="services.html#repair">AC repair</a>, <a href="services.html#ducting">ducting and insulation</a> and <a href="services.html#parts">spare parts</a>, across Kuwait City, Hawalli, Farwaniya, Ahmadi, Jahra and Mubarak Al-Kabeer.</p>`}
@@ -368,7 +368,7 @@ function build(lang, file) {
   <div class="container">
     ${ruleHead(1, 'من نحن', 'Who we are', null)}
     <div class="prose">
-      <p>${t('الباز للهندسة شركة تكييف في الكويت. نبيع ونركّب الوحدات الجديدة، ونستبدل ونشتري القديمة، ونصونها جميعاً، للمنازل والمكاتب والمعارض والمدارس والعيادات في جميع محافظات الكويت.', 'ALBAZ Engineering is an air conditioning company in Kuwait. We sell and install new units, replace and buy old ones, and maintain them all, for homes, offices, showrooms, schools and clinics in every Kuwait governorate.')}</p>
+      <p>${t('الباز الهندسية شركة تكييف في الكويت. نبيع ونركّب الوحدات الجديدة، ونستبدل ونشتري القديمة، ونصونها جميعاً، للمنازل والمكاتب والمعارض والمدارس والعيادات في جميع محافظات الكويت.', 'ALBAZ Engineering is an air conditioning company in Kuwait. We sell and install new units, replace and buy old ones, and maintain them all, for homes, offices, showrooms, schools and clinics in every Kuwait governorate.')}</p>
       <p>${t('نعمل على أنظمة السبليت والشباك والكاسيت والمخفي والباكج وVRF، ونخزّن قطع الغيار اللازمة لها.', 'We work on split, window, cassette, ducted, package and VRF systems, and stock the spare parts they need.')}</p>
     </div>
   </div>
@@ -424,7 +424,7 @@ function build(lang, file) {
   const url = urlOf(lang, file);
   const business = {
     '@context': 'https://schema.org', '@type': 'HVACBusiness', '@id': SITE + '/#business',
-    name: 'Al Baz Engineering', alternateName: 'الباز للهندسة', url: SITE + '/',
+    name: 'Al Baz Engineering', alternateName: 'الباز الهندسية', url: SITE + '/',
     logo: SITE + '/brand/app-icon-white.png', image: SITE + '/brand/app-icon-white.png',
     telephone: TEL, email: EMAIL,
     description: 'Air conditioning company in Kuwait: new AC units sold and installed, old units replaced and bought back, central and ducted systems, VRF, ducting, AC maintenance contracts, AC repair and spare parts. شركة تكييف في الكويت: بيع مكيفات جديدة، استبدال وشراء المكيفات القديمة، صيانة وإصلاح مكيفات سبليت وسنترال وVRF.',
