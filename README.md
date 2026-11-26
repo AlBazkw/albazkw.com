@@ -71,3 +71,11 @@ name and phone as the site, verify the site in Google Search Console and submit 
 - Real project names for the "Our work" page, which currently shows kinds of work only.
 - Confirmation of the trade-in terms shown: same-day pricing, cash or credit, removal included.
 - Whether a 24/7 emergency line exists (removed until confirmed).
+
+## Search and AI visibility (added 2026-11-26)
+
+- **One page per service.** The eight services each have their own page in both languages (`new-ac-units.html`, `ac-replacement.html`, `sell-used-ac.html`, `vrf-central-ac.html`, `ac-ducting.html`, `ac-maintenance.html`, `ac-repair.html`, `ac-spare-parts.html`). Their headline, Google title and description, opening paragraph and questions live in `tools/service-pages.js`. The list of what each service includes still lives in `SERVICES` in `tools/build.js`.
+- **Titles and descriptions.** Keep titles under about 60 characters and descriptions under about 155. Longer ones get cut off in Google.
+- **Photos.** Pages load light WebP copies. After adding or changing a photo in `img/photos`, run `npm install --no-save sharp` then `node tools/images.js`, then rebuild. This also remakes `img/og.jpg`, the picture shown when a link is shared.
+- **Business facts for machines.** Every page carries the business details as structured data (name, phone, address, hours, service area, services). `llms.txt` states the same facts in plain text for AI assistants, and `robots.txt` allows search and AI crawlers. All three are written by `tools/build.js`, so a change to the phone, hours or address in that file updates them everywhere.
+- **Only confirmed facts.** No prices, guarantees, response times, review scores or years in business unless the business has confirmed them.

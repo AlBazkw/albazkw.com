@@ -1,0 +1,62 @@
+{
+  "ducted-ceiling-white": [
+    1200,
+    1600
+  ],
+  "ductwork-ceiling": [
+    1600,
+    2400
+  ],
+  "ductwork-exterior": [
+    1200,
+    1600
+  ],
+  "hero-rooftop": [
+    1600,
+    2400
+  ],
+  "industrial-chillers": [
+    1200,
+    800
+  ],
+  "manifold-gauges": [
+    1600,
+    2288
+  ],
+  "outdoor-units-frame": [
+    1200,
+    1797
+  ],
+  "package-unit-service": [
+    1600,
+    1274
+  ],
+  "refrigerant-workshop": [
+    1600,
+    2844
+  ],
+  "rooftop-unit-gulf": [
+    1200,
+    1800
+  ],
+  "split-living-room": [
+    1600,
+    1067
+  ],
+  "technician-coil": [
+    1600,
+    2400
+  ],
+  "technician-gauge": [
+    1600,
+    2844
+  ],
+  "technician-gauges-2": [
+    1200,
+    1800
+  ],
+  "vrf-outdoor-units": [
+    1600,
+    1600
+  ]
+}

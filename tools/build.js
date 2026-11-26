@@ -14,7 +14,12 @@ const INSTAGRAM = 'https://www.instagram.com/albaz.kw/';
 const MAP = 'https://maps.app.goo.gl/PmMJFyK5GMTrRpu48';
 const BRANDS = 'Gree · Midea · LG · Samsung · York · Carrier';
 
-const FILES = ['index.html', 'services.html', 'projects.html', 'about.html', 'contact.html'];
+const PAGES = require('./service-pages.js');           // one page per service
+const IMG = require('./image-sizes.json');             // photo dimensions, written by tools/images.js
+const CORE = ['index.html', 'services.html', 'projects.html', 'about.html', 'contact.html'];
+const FILES = [...CORE, ...Object.values(PAGES).map(p => p.slug)];
+const SERVICE_BY_FILE = Object.fromEntries(Object.entries(PAGES).map(([id, p]) => [p.slug, id]));
+const TODAY = new Date().toISOString().slice(0, 10);
 const urlOf = (lang, file) => SITE + (lang === 'ar' ? '/' : '/en/') + (file === 'index.html' ? '' : file);
 const hrefOf = file => (file === 'index.html' ? './' : file);
 const arDigits = n => String(n).padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
@@ -22,25 +27,25 @@ const arDigits = n => String(n).padStart(2, '0').replace(/\d/g, d => '٠١٢٣٤
 /* ------------------------------------------------------------------ SEO */
 const META = {
   'index.html': {
-    ar: ['شركة تكييف في الكويت | بيع مكيفات جديدة، استبدال وشراء المكيفات القديمة – الباز الهندسية',
-         'الباز الهندسية تبيع وتركّب مكيفات جديدة، تستبدل وتحدّث المكيفات القديمة، وتشتري المكيفات المستعملة نقداً أو كخصم. مكيفات سبليت وسنترال وVRF وصيانة تكييف في جميع محافظات الكويت.'],
-    en: ['New AC Units, Replacement & Old AC Buy-Back in Kuwait | Al Baz Engineering',
-         'Al Baz Engineering sells and installs new air conditioning units, replaces and upgrades old AC, and buys used units for cash or trade-in. Split, central and VRF systems and HVAC maintenance across Kuwait.'] },
+    ar: ['شركة تكييف في الكويت: بيع، تركيب وشراء المكيفات | الباز الهندسية',
+         'الباز الهندسية شركة تكييف في الكويت: نبيع ونركّب مكيفات جديدة سبليت وسنترال وVRF، نستبدل القديمة، ونشتري المكيفات المستعملة. صيانة وإصلاح في جميع المحافظات.'],
+    en: ['AC Sales, Installation & Buy-Back in Kuwait | Al Baz Engineering',
+         'Al Baz Engineering is an air conditioning company in Kuwait. We sell and install new AC units, replace old ones and buy used units. Split, central and VRF.'] },
   'services.html': {
-    ar: ['خدمات التكييف في الكويت | تركيب مكيفات جديدة، استبدال وشراء القديمة، وصيانة – الباز الهندسية',
+    ar: ['خدمات التكييف في الكويت: تركيب، استبدال، صيانة | الباز الهندسية',
          'بيع وتركيب مكيفات جديدة، استبدال المكيفات القديمة أو شراؤها، تكييف سنترال وأنظمة VRF، دكت، عقود صيانة تكييف، إصلاح مكيفات وقطع غيار في جميع مناطق الكويت.'],
-    en: ['AC Installation, Replacement, Old Unit Buy-Back & Maintenance in Kuwait | Al Baz Engineering',
-         'New AC units sold and installed, old air conditioners replaced or bought back, VRF and central systems, ducting, AC maintenance contracts, repair and spare parts across Kuwait.'] },
+    en: ['AC & HVAC Services in Kuwait | Al Baz Engineering',
+         'New AC units sold and installed, old units replaced or bought back, VRF and central systems, ducting, maintenance contracts, repair and spare parts in Kuwait.'] },
   'projects.html': {
-    ar: ['أعمال التكييف في الكويت | سبليت، مخفي، باكج وVRF – الباز الهندسية',
+    ar: ['أعمال التكييف في الكويت: سبليت، سنترال وVRF | الباز الهندسية',
          'ما تنفّذه الباز الهندسية في الكويت: وحدات سبليت للمنازل، تكييف مخفي وسنترال للمكاتب والفلل، وحدات باكج، أنظمة VRF، استبدال المكيفات القديمة وعقود الصيانة.'],
     en: ['Air Conditioning & HVAC Work in Kuwait | Al Baz Engineering',
-         'What Al Baz Engineering installs in Kuwait: split units for homes, ducted and central AC for offices and villas, package units, VRF systems, old unit replacement and maintenance contracts.'] },
+         'What Al Baz Engineering installs in Kuwait: split units for homes, ducted and central AC for offices and villas, package units, VRF and old unit replacement.'] },
   'about.html': {
     ar: ['عن الباز الهندسية | متخصصو التكييف والتبريد في الكويت',
          'الباز الهندسية شركة كويتية متخصصة في التكييف: بيع وتركيب مكيفات سبليت وسنترال ومخفي وأنظمة VRF، واستبدال وشراء المكيفات القديمة، وصيانتها.'],
     en: ['About Al Baz Engineering | AC & HVAC Specialists in Kuwait',
-         'Al Baz Engineering is a Kuwaiti air conditioning and HVAC specialist: new split, central, ducted and VRF AC systems sold and installed, old units replaced and bought back, and all of it maintained.'] },
+         'Al Baz Engineering is an air conditioning and HVAC specialist in Kuwait: new split, central and VRF systems sold and installed, old units replaced and bought.'] },
   'contact.html': {
     ar: ['اتصل بالباز الهندسية | عرض سعر تكييف مجاني في الكويت',
          'اطلب عرض سعر مجاني لتركيب تكييف جديد، أو استبدال مكيفك القديم، أو بيعه. الباز الهندسية، تكييف في جميع محافظات الكويت.'],
@@ -128,6 +133,24 @@ const FAQ = {
   ],
 };
 
+/* Short link names for the service pages (footer, "other services") */
+const SHORT = {
+  install: ['مكيفات جديدة', 'New AC units'], replace: ['استبدال المكيفات', 'AC replacement'],
+  buyback: ['شراء المكيفات المستعملة', 'We buy used AC'], vrf: ['تكييف مركزي وVRF', 'Central AC & VRF'],
+  ducting: ['دكت التكييف', 'AC ducting'], amc: ['صيانة مكيفات', 'AC maintenance'],
+  repair: ['تصليح مكيفات', 'AC repair'], parts: ['قطع غيار', 'Spare parts'],
+};
+
+/* Where we work: the six governorates with some of the areas in each */
+const AREAS = [
+  { gov: 'Capital', schema: 'Al Asimah', ar: 'العاصمة: مدينة الكويت، الشويخ، كيفان، الروضة، السرة، اليرموك، الصليبيخات', en: 'Kuwait City, Shuwaikh, Kaifan, Rawda, Surra, Yarmouk, Sulaibikhat' },
+  { gov: 'Hawalli', schema: 'Hawalli', ar: 'حولي: السالمية، الجابرية، الرميثية، بيان، مشرف، سلوى', en: 'Hawalli, Salmiya, Jabriya, Rumaithiya, Bayan, Mishref, Salwa' },
+  { gov: 'Farwaniya', schema: 'Al Farwaniyah', ar: 'الفروانية: الري، خيطان، جليب الشيوخ، العارضية، الأندلس، الرقعي', en: 'Farwaniya, Al Rai, Khaitan, Jleeb Al-Shuyoukh, Ardiya, Andalous, Riggae' },
+  { gov: 'Ahmadi', schema: 'Al Ahmadi', ar: 'الأحمدي: الفحيحيل، المنقف، المهبولة، أبو حليفة، الفنطاس، صباح الأحمد', en: 'Ahmadi, Fahaheel, Mangaf, Mahboula, Abu Halifa, Fintas, Sabah Al-Ahmad' },
+  { gov: 'Jahra', schema: 'Al Jahra', ar: 'الجهراء: سعد العبدالله، القصر، النعيم، العيون، الصليبية', en: 'Jahra, Saad Al-Abdullah, Qasr, Naeem, Oyoun, Sulaibiya' },
+  { gov: 'Mubarak Al-Kabeer', schema: 'Mubarak Al-Kabeer', ar: 'مبارك الكبير: القرين، العدان، القصور، صباح السالم، المسيلة، أبو فطيرة', en: 'Mubarak Al-Kabeer, Qurain, Adan, Qusour, Sabah Al-Salem, Messila, Abu Fatira' },
+];
+
 const WORK = [
   { photo: 'vrf-outdoor-units', lat: 'VRF', ar: ['أنظمة VRF', 'وحدة خارجية واحدة تخدم مبنى كاملاً، بتحكم مستقل لكل غرفة.', 'صفوف من وحدات VRF الخارجية على سطح مبنى'], en: ['VRF systems', 'One outdoor plant serving a whole building, with independent control per room.', 'Rows of VRF outdoor units on a rooftop'] },
   { photo: 'ducted-ceiling-white', lat: 'Ducted', ar: ['تكييف مخفي وسنترال', 'وحدات مخفية ودكت للمكاتب والفلل والمعارض.', 'نظام تكييف بالدكت عبر سقف مفتوح'], en: ['Ducted and central AC', 'Concealed units and ductwork for offices, villas and showrooms.', 'A ducted air conditioning system across an open ceiling'] },
@@ -145,14 +168,20 @@ function build(lang, file) {
   const other = ar ? 'en/' + (file === 'index.html' ? '' : file) : '../' + (file === 'index.html' ? '' : file);
   const arrow = ar ? '←' : '→';
   const num = n => (ar ? arDigits(n) : String(n).padStart(2, '0'));
-  const ph = n => `${base}img/photos/${n}.jpg`;
+  // Photos load as light WebP copies (tools/images.js); the browser picks the size.
+  const pic = (n, alt, extra = 'loading="lazy" decoding="async"', sizes = '(max-width: 820px) 100vw, 50vw') => {
+    const [w, h] = IMG[n] || [1600, 1067];
+    const p = `${base}img/photos/${n}`;
+    return `<img src="${p}-1400.webp" srcset="${p}-800.webp 800w, ${p}-1400.webp ${Math.min(1400, w)}w" sizes="${sizes}" width="${w}" height="${h}" alt="${alt}" ${extra}>`;
+  };
+  const svc = id => PAGES[id].slug;
   const sq = '<span class="sq" aria-hidden="true"></span>';
   const ruleHead = (n, a, e, side) => `<div class="rule-head"><h2>${num(n)} — ${t(a, e)}</h2>${side ? (ar ? `<span class="label" lang="en">${side[1]}</span>` : `<span class="ara" lang="ar">${side[0]}</span>`) : ''}</div>`;
   const rows = (items, cls = '') => `<ul class="rows${cls}">${items.map(i => Array.isArray(i) ? `<li><span>${i[0]}</span><span class="label" lang="en">${i[1]}</span></li>` : `<li><span>${i}</span></li>`).join('')}</ul>`;
 
   const nav = [
     ['services.html', 'خدماتنا', 'Services'],
-    ['services.html#buyback', 'بيع مكيفك القديم', 'Sell your old unit'],
+    [PAGES.buyback.slug, 'بيع مكيفك القديم', 'Sell your old unit'],
     ['projects.html', 'أعمالنا', 'Our work'],
     ['about.html', 'من نحن', 'About'],
   ];
@@ -200,6 +229,9 @@ function build(lang, file) {
       <a href="about.html">${t('من نحن', 'About')}</a>
       <a href="contact.html">${t('اتصل بنا', 'Contact')}</a>
     </nav>
+    <nav class="foot-nav" aria-label="${t('الخدمات', 'Services')}">
+      ${SERVICES.map(s => `<a href="${svc(s.id)}">${SHORT[s.id][ar ? 0 : 1].replace('&', '&amp;')}</a>`).join('\n      ')}
+    </nav>
     <div class="legal">
       <span>© <span id="year">2026</span> ${t('الباز الهندسية. جميع الحقوق محفوظة.', 'ALBAZ Engineering. All rights reserved.')}</span>
       <span class="label" lang="en">albazkw.com · Sales · Installation · Maintenance</span>
@@ -239,7 +271,7 @@ function build(lang, file) {
   </div>
 </section>
 
-<div class="photo-band"><img src="${ph('vrf-outdoor-units')}" alt="${t('صفوف من وحدات التكييف الخارجية على سطح مبنى', 'Rows of outdoor air conditioning units on a rooftop')}" fetchpriority="high"></div>
+<div class="photo-band">${pic('vrf-outdoor-units', t('صفوف من وحدات التكييف الخارجية على سطح مبنى', 'Rows of outdoor air conditioning units on a rooftop'), 'fetchpriority="high"', '100vw')}</div>
 
 <section class="section" id="services">
   <div class="container">
@@ -249,29 +281,29 @@ function build(lang, file) {
         <span class="label" lang="en">01 · New units</span>
         <h3>${t('مكيفات جديدة', 'New units')}</h3>
         <p>${t('سبليت وشباك وكاسيت ومخفي وباكج، بالحجم الصحيح للمكان، وبتركيب فرقنا.', 'Split, window, cassette, ducted and package units, sized to the room and fitted by our own crews.')}</p>
-        <a class="more" href="services.html#install">${t('المزيد', 'More')} ${arrow}</a>
+        <a class="more" href="${svc('install')}">${t('المزيد', 'More')} ${arrow}</a>
       </div>
       <div class="col">
         <span class="label" lang="en">02 · Replace &amp; upgrade</span>
         <h3>${t('استبدال وتحديث', 'Replace and upgrade')}</h3>
         <p>${t('القديم يطلع والجديد يتركّب في زيارة واحدة. ونقول لك بصراحة إذا كان الإصلاح أوفر.', 'Old unit out, new unit in, one visit. And we tell you straight when a repair is the better buy.')}</p>
-        <a class="more" href="services.html#replace">${t('المزيد', 'More')} ${arrow}</a>
+        <a class="more" href="${svc('replace')}">${t('المزيد', 'More')} ${arrow}</a>
       </div>
       <div class="col">
         <span class="label" lang="en">03 · We buy old units</span>
         <h3>${t('نشتري القديم', 'We buy old units')}</h3>
         <p>${t('شغّال أو معطّل، من أي ماركة. نقداً، أو خصماً من سعر الوحدة الجديدة.', 'Working or faulty, any brand. Paid in cash, or taken off the price of a new unit.')}</p>
-        <a class="more" href="services.html#buyback">${t('المزيد', 'More')} ${arrow}</a>
+        <a class="more" href="${svc('buyback')}">${t('المزيد', 'More')} ${arrow}</a>
       </div>
     </div>
     <div class="also">
       <span class="note">${t('وأيضاً', 'Also')}</span>
       <ul class="chips">
-        <li><a class="chip" href="services.html#vrf">${t('VRF وتكييف مركزي', 'VRF &amp; central systems')}</a></li>
-        <li><a class="chip" href="services.html#ducting">${t('دكت وعزل', 'Ducting &amp; insulation')}</a></li>
-        <li><a class="chip" href="services.html#amc">${t('عقود صيانة', 'Maintenance contracts')}</a></li>
-        <li><a class="chip" href="services.html#repair">${t('إصلاح', 'Repair')}</a></li>
-        <li><a class="chip" href="services.html#parts">${t('قطع غيار', 'Spare parts')}</a></li>
+        <li><a class="chip" href="${svc('vrf')}">${t('VRF وتكييف مركزي', 'VRF &amp; central systems')}</a></li>
+        <li><a class="chip" href="${svc('ducting')}">${t('دكت وعزل', 'Ducting &amp; insulation')}</a></li>
+        <li><a class="chip" href="${svc('amc')}">${t('عقود صيانة', 'Maintenance contracts')}</a></li>
+        <li><a class="chip" href="${svc('repair')}">${t('إصلاح', 'Repair')}</a></li>
+        <li><a class="chip" href="${svc('parts')}">${t('قطع غيار', 'Spare parts')}</a></li>
       </ul>
     </div>
   </div>
@@ -299,15 +331,82 @@ function build(lang, file) {
     ${ruleHead(3, 'الباز الهندسية', 'ALBAZ Engineering', ['تكييف في الكويت', 'Air conditioning in Kuwait'])}
     <div class="prose">
       ${ar
-        ? `<p>الباز الهندسية شركة تكييف وتبريد في الكويت. نبيع ونركّب <a href="services.html#install">مكيفات جديدة سبليت وشباك وكاسيت ومخفي</a>، و<a href="services.html#replace">نستبدل ونحدّث المكيفات القديمة</a>، و<a href="services.html#buyback">نشتري المكيفات المستعملة</a>، ونصمّم <a href="services.html#vrf">أنظمة التكييف السنترال (المركزي) وVRF</a> للفلل والمكاتب والمعارض.</p>
-      <p>وبعد التركيب: <a href="services.html#amc">عقود صيانة تكييف سنوية</a>، و<a href="services.html#repair">إصلاح مكيفات</a>، و<a href="services.html#ducting">دكت وعزل</a>، و<a href="services.html#parts">قطع غيار</a>، في مدينة الكويت وحولي والفروانية والأحمدي والجهراء ومبارك الكبير.</p>`
-        : `<p>ALBAZ Engineering is an air conditioning and HVAC company in Kuwait. We sell and install <a href="services.html#install">new split AC, window, cassette and ducted units</a>, <a href="services.html#replace">replace and upgrade old air conditioners</a>, <a href="services.html#buyback">buy used AC units</a>, and design <a href="services.html#vrf">central air conditioning and VRF systems</a> for villas, offices and showrooms.</p>
-      <p>After the install: <a href="services.html#amc">annual AC maintenance contracts</a>, <a href="services.html#repair">AC repair</a>, <a href="services.html#ducting">ducting and insulation</a> and <a href="services.html#parts">spare parts</a>, across Kuwait City, Hawalli, Farwaniya, Ahmadi, Jahra and Mubarak Al-Kabeer.</p>`}
+        ? `<p>الباز الهندسية شركة تكييف وتبريد في الكويت. نبيع ونركّب <a href="${svc('install')}">مكيفات جديدة سبليت وشباك وكاسيت ومخفي</a>، و<a href="${svc('replace')}">نستبدل ونحدّث المكيفات القديمة</a>، و<a href="${svc('buyback')}">نشتري المكيفات المستعملة</a>، ونصمّم <a href="${svc('vrf')}">أنظمة التكييف السنترال (المركزي) وVRF</a> للفلل والمكاتب والمعارض.</p>
+      <p>وبعد التركيب: <a href="${svc('amc')}">عقود صيانة تكييف سنوية</a>، و<a href="${svc('repair')}">إصلاح مكيفات</a>، و<a href="${svc('ducting')}">دكت وعزل</a>، و<a href="${svc('parts')}">قطع غيار</a>، في مدينة الكويت وحولي والفروانية والأحمدي والجهراء ومبارك الكبير.</p>`
+        : `<p>ALBAZ Engineering is an air conditioning and HVAC company in Kuwait. We sell and install <a href="${svc('install')}">new split AC, window, cassette and ducted units</a>, <a href="${svc('replace')}">replace and upgrade old air conditioners</a>, <a href="${svc('buyback')}">buy used AC units</a>, and design <a href="${svc('vrf')}">central air conditioning and VRF systems</a> for villas, offices and showrooms.</p>
+      <p>After the install: <a href="${svc('amc')}">annual AC maintenance contracts</a>, <a href="${svc('repair')}">AC repair</a>, <a href="${svc('ducting')}">ducting and insulation</a> and <a href="${svc('parts')}">spare parts</a>, across Kuwait City, Hawalli, Farwaniya, Ahmadi, Jahra and Mubarak Al-Kabeer.</p>`}
       <p class="note">${t('وحدات جديدة من', 'New units from')}</p>
       <p class="brands lat">${BRANDS}</p>
     </div>
   </div>
+</section>
+
+<section class="section band-bone" id="areas">
+  <div class="container">
+    ${ruleHead(4, 'أين نعمل', 'Where we work', ['جميع محافظات الكويت', 'All six Kuwait governorates'])}
+    <p class="lead" style="padding-top:36px;max-width:60ch">${t('نبيع ونركّب ونصون المكيفات في محافظات الكويت الست، ومقرّنا في الري.', 'We sell, install and maintain air conditioning in all six Kuwait governorates, from our base in Al Rai.')}</p>
+    <div style="padding-top:28px">${rows(AREAS.map(a => [ar ? a.ar : a.en, a.gov]))}</div>
+  </div>
 </section>`;
+  }
+
+  /* --------------------------------------------- one page per service */
+  const sid = SERVICE_BY_FILE[file];
+  if (sid) {
+    const s = SERVICES.find(x => x.id === sid);
+    const c = s[lang];
+    const p = PAGES[sid][lang];
+    main = `
+<section class="hero">
+  <div class="container">
+    <a class="label" lang="en" href="services.html">Services · ${s.lat}</a>
+    <h1 class="display sm">${p.h1}${sq}</h1>
+    <div class="hero-foot">
+      <div>
+        <p class="lead">${p.intro}</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="contact.html">${t('اطلب عرض سعر مجاني', 'Get a free quote')}</a>
+          <a class="link-under" href="tel:${TEL}" dir="ltr">${PHONE}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="svc" style="padding-bottom:clamp(64px,7vw,96px)">
+  <div class="container">
+    ${ruleHead(1, 'ما يشمله العمل', 'What is included', null)}
+    <div class="split">
+      <div>
+        <p class="lead">${c.lead}</p>
+        ${rows(c.rows, ' plain')}
+      </div>
+      <figure class="shot">${pic(s.photo, c.alt, 'fetchpriority="high"')}</figure>
+    </div>
+  </div>
+</section>
+
+<section class="section band-bone" id="faq">
+  <div class="container">
+    ${ruleHead(2, 'أسئلة شائعة', 'Questions we hear', null)}
+    <div class="faq">
+      ${p.faq.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('\n      ')}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    ${ruleHead(3, 'خدمات أخرى', 'Other services', null)}
+    <ul class="chips" style="padding-top:36px">
+      ${SERVICES.filter(x => x.id !== sid).map(x => `<li><a class="chip" href="${svc(x.id)}">${SHORT[x.id][ar ? 0 : 1].replace('&', '&amp;')}</a></li>`).join('\n      ')}
+    </ul>
+  </div>
+</section>`;
+    extraLd.push({ '@context': 'https://schema.org', '@type': 'Service', '@id': urlOf(lang, file) + '#service',
+      name: p.h1, serviceType: s.en.t, description: p.desc, url: urlOf(lang, file), inLanguage: lang,
+      provider: { '@id': SITE + '/#business' }, areaServed: { '@type': 'Country', name: 'Kuwait' } });
+    extraLd.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: p.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
   }
 
   if (file === 'services.html') {
@@ -324,8 +423,9 @@ function build(lang, file) {
       <div>
         <p class="lead">${c.lead}</p>
         ${rows(c.rows, ' plain')}
+        <p style="padding-top:24px"><a class="link-under" href="${svc(s.id)}">${t('تفاصيل الخدمة', 'About this service')} ${arrow}</a></p>
       </div>
-      <figure class="shot"><img src="${ph(s.photo)}" alt="${c.alt}" loading="lazy" decoding="async"></figure>
+      <figure class="shot">${pic(s.photo, c.alt)}</figure>
     </div>
   </div>
 </section>`; }).join('')
@@ -351,7 +451,7 @@ function build(lang, file) {
     ${ruleHead(1, 'ما ننفّذه', 'What we install', null)}
     <div class="work">
       ${WORK.map(w => { const c = w[lang]; return `<figure>
-        <img src="${ph(w.photo)}" alt="${c[2]}" loading="lazy" decoding="async">
+        ${pic(w.photo, c[2], 'loading="lazy" decoding="async"', '(max-width: 700px) 100vw, 33vw')}
         <figcaption><span class="label" lang="en">${w.lat}</span><h3>${c[0]}</h3><p class="muted">${c[1]}</p></figcaption>
       </figure>`; }).join('\n      ')}
     </div>
@@ -420,22 +520,30 @@ function build(lang, file) {
   }
 
   /* ------------------------------------------------------------------ head */
-  const [title, desc] = META[file][lang];
+  const [title, desc] = sid ? [PAGES[sid][lang].title, PAGES[sid][lang].desc] : META[file][lang];
   const url = urlOf(lang, file);
   const business = {
     '@context': 'https://schema.org', '@type': 'HVACBusiness', '@id': SITE + '/#business',
-    name: 'Al Baz Engineering', alternateName: 'الباز الهندسية', url: SITE + '/',
-    logo: SITE + '/brand/app-icon-white.png', image: SITE + '/brand/app-icon-white.png',
+    name: 'Al Baz Engineering', alternateName: ['ALBAZ Engineering', 'الباز الهندسية'], url: SITE + '/',
+    logo: SITE + '/brand/app-icon-white.png', image: SITE + '/img/og.jpg',
     telephone: TEL, email: EMAIL,
+    contactPoint: { '@type': 'ContactPoint', telephone: TEL, email: EMAIL, contactType: 'customer service', areaServed: 'KW', availableLanguage: ['Arabic', 'English'] },
     description: 'Air conditioning company in Kuwait: new AC units sold and installed, old units replaced and bought back, central and ducted systems, VRF, ducting, AC maintenance contracts, AC repair and spare parts. شركة تكييف في الكويت: بيع مكيفات جديدة، استبدال وشراء المكيفات القديمة، صيانة وإصلاح مكيفات سبليت وسنترال وVRF.',
-    address: { '@type': 'PostalAddress', addressLocality: 'Al Rai', addressCountry: 'KW' },
+    address: { '@type': 'PostalAddress', addressLocality: 'Al Rai', addressRegion: 'Al Farwaniyah', addressCountry: 'KW' },
     hasMap: MAP, sameAs: [INSTAGRAM],
     openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '08:00', closes: '20:00' }],
-    areaServed: { '@type': 'Country', name: 'Kuwait' }, knowsLanguage: ['ar', 'en'],
+    areaServed: [{ '@type': 'Country', name: 'Kuwait' }, ...AREAS.map(a => ({ '@type': 'AdministrativeArea', name: a.schema + ' Governorate, Kuwait' }))],
+    knowsLanguage: ['ar', 'en'],
     hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Air conditioning services',
-      itemListElement: SERVICES.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.en.t, alternateName: s.ar.t, url: SITE + '/services.html#' + s.id, areaServed: 'Kuwait' } })) },
+      itemListElement: SERVICES.map(s => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.en.t, alternateName: s.ar.t, url: urlOf(lang, PAGES[s.id].slug), areaServed: 'Kuwait' } })) },
   };
   const ld = [business, ...extraLd];
+  if (file === 'index.html') ld.push({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/',
+    name: 'Al Baz Engineering', alternateName: ['ALBAZ Engineering', 'الباز الهندسية'], inLanguage: ['ar', 'en'], publisher: { '@id': SITE + '/#business' } });
+  if (sid) ld.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: t('الرئيسية', 'Home'), item: urlOf(lang, 'index.html') },
+    { '@type': 'ListItem', position: 2, name: t('خدماتنا', 'Services'), item: urlOf(lang, 'services.html') },
+    { '@type': 'ListItem', position: 3, name: SHORT[sid][ar ? 0 : 1], item: url }] });
   if (CRUMB[file]) ld.push({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: t('الرئيسية', 'Home'), item: urlOf(lang, 'index.html') },
     { '@type': 'ListItem', position: 2, name: CRUMB[file][ar ? 0 : 1], item: url }] });
@@ -458,8 +566,10 @@ function build(lang, file) {
   <meta property="og:url" content="${url}">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${desc}">
-  <meta property="og:image" content="${SITE}/brand/app-icon-white.png">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="${SITE}/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#f6f5f2">
   <link rel="preload" href="${base}fonts/${ar ? 'cairo-arabic' : 'space-grotesk-latin'}.woff2" as="font" type="font/woff2" crossorigin>
@@ -491,13 +601,56 @@ const entries = FILES.flatMap(f => ['ar', 'en'].map(l => `  <url>
     <xhtml:link rel="alternate" hreflang="ar" href="${urlOf('ar', f)}"/>
     <xhtml:link rel="alternate" hreflang="en" href="${urlOf('en', f)}"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${urlOf('ar', f)}"/>
-    <changefreq>monthly</changefreq>
-    <priority>${f === 'index.html' ? '1.0' : '0.8'}</priority>
+    <lastmod>${TODAY}</lastmod>
   </url>`));
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${entries.join('\n')}
 </urlset>
 `);
-fs.writeFileSync(path.join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
-console.log('built', FILES.length * 2, 'pages + sitemap.xml + robots.txt');
+/* robots.txt: everything is open. The search and AI assistant crawlers are
+   named so the intent is explicit: they may read the whole site. */
+const BOTS = ['Googlebot', 'Bingbot', 'GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended'];
+fs.writeFileSync(path.join(ROOT, 'robots.txt'), `User-agent: *\nAllow: /\n\n${BOTS.map(b => `User-agent: ${b}\nAllow: /\n`).join('\n')}\nSitemap: ${SITE}/sitemap.xml\n`);
+
+/* llms.txt: the business in plain text for AI assistants. Facts only, and
+   the same facts as the pages. Update it whenever hours, phone or services change. */
+fs.writeFileSync(path.join(ROOT, 'llms.txt'), `# Al Baz Engineering (الباز الهندسية)
+
+> Air conditioning (HVAC) company in Kuwait. Sells and installs new AC units, replaces old units, buys used and old AC units, and provides central AC and VRF systems, ducting, maintenance contracts, repair and spare parts. Based in Al Rai, working in all six Kuwait governorates.
+
+شركة تكييف في الكويت: بيع وتركيب مكيفات جديدة، استبدال المكيفات القديمة، شراء المكيفات المستعملة، تكييف مركزي (سنترال) وأنظمة VRF، دكت، عقود صيانة، تصليح مكيفات وقطع غيار. المقر في الري، والعمل في جميع محافظات الكويت.
+
+## Services
+${SERVICES.map(s => `- [${s.en.t}](${urlOf('en', PAGES[s.id].slug)}): ${PAGES[s.id].en.intro}`).join('\n')}
+
+## الخدمات
+${SERVICES.map(s => `- [${s.ar.t}](${urlOf('ar', PAGES[s.id].slug)}): ${PAGES[s.id].ar.intro}`).join('\n')}
+
+## Where we work
+All six Kuwait governorates:
+${AREAS.map(a => `- ${a.gov}: ${a.en}`).join('\n')}
+
+## Hours
+Saturday to Thursday, 8 am to 8 pm (Kuwait time). Closed on Friday.
+
+## Contact
+- Phone: ${PHONE}
+- Email: ${EMAIL}
+- Address: Al Rai, Kuwait. Map: ${MAP}
+- Instagram: ${INSTAGRAM}
+- Free quote: ${urlOf('en', 'contact.html')}
+
+## Units and brands
+- Split units from 1 to 3 ton; window, cassette and ducted units from 2 to 5 ton; package units from 5 to 10 ton; VRF outdoor units from 8 to 20 HP.
+- New units supplied from ${BRANDS.replace(/ · /g, ', ')}.
+- Used units bought: split, window, cassette, ducted, package and VRF, any brand, working or faulty.
+
+## Languages
+- Arabic (default): ${SITE}/
+- English: ${SITE}/en/
+
+## Common questions
+${FAQ.en.map(([q, a]) => `### ${q}\n${a}`).join('\n\n')}
+`);
+console.log('built', FILES.length * 2, 'pages + sitemap.xml + robots.txt + llms.txt');
